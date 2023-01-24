@@ -31,7 +31,7 @@ class HeaderContainer extends StatelessWidget {
               )),
           Center(
             child: Image.asset(
-              '/logo.png',
+              '/FluFlix2.png',
             ),
           ),
         ],
