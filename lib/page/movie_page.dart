@@ -1,10 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/header_container.dart';
 
 class MoviePage extends StatefulWidget {
-  const MoviePage({Key? key}) : super(key: key);
+  final int? movieId;
+  final String? movieTitle;
+
+  const MoviePage({
+    Key? key,
+    this.movieId,
+    this.movieTitle,
+  }) : super(key: key);
 
   @override
   State<MoviePage> createState() => _MoviePageState();
@@ -13,12 +19,14 @@ class MoviePage extends StatefulWidget {
 class _MoviePageState extends State<MoviePage> {
   @override
   Widget build(BuildContext context) {
+    String movieTitle = widget.movieTitle!;
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(bottom: 30),
         child: Column(
           children: <Widget>[
-            const HeaderContainer(text: "Movie", height: 0.15),
+            HeaderContainer(text: movieTitle, height: 0.10),
             Expanded(
               flex: 1,
               child: Container(

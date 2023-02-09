@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../page/home_page.dart';
+
 class HeaderContainer extends StatelessWidget {
   final String text;
   final double height;
@@ -29,11 +31,21 @@ class HeaderContainer extends StatelessWidget {
               right: 20,
               child: Text(
                 text,
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               )),
           Center(
-            child: Image.asset(
-              '/FluFlix2.png',
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
+              },
+              child: Image.asset(
+                '/FluFlix2.png',
+              ),
             ),
           ),
         ],
