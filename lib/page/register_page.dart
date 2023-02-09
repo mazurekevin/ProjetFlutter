@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../service/service_user.dart';
@@ -45,7 +42,7 @@ class _RegPageState extends State<RegPage> {
 
         child: Column(
           children: <Widget>[
-            HeaderContainer("Register"),
+            const HeaderContainer(text: "Register", height: 0.4),
             Expanded(
               flex: 1,
               child: Container(

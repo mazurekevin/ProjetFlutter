@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projet_flutter/ImagePicker.dart';
-import 'package:projet_flutter/page/loading_page.dart';
+import 'package:projet_flutter/page/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: TestImage(),
+      home: HomePage(),
     );
   }
 }
