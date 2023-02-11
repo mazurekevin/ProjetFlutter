@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/page/home_page.dart';
 import 'package:projet_flutter/page/register_page.dart';
+import 'package:projet_flutter/globals.dart' as global;
 
 import '../models/login.dart';
 import '../service/service_user.dart';
@@ -29,8 +31,12 @@ class _LoginPageState extends State<LoginPage> {
     var response = await ServiceUser().login(login);
     if (response?.email == login.email) {
       print("good");
+      global.user = response;
       //changer de page => homePage
-      //Navigator.push();
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage()));
     } else {
       print("erreur");
     }

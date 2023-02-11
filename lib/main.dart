@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/page/home_page.dart';
+import 'package:projet_flutter/page/loading_page.dart';
+import 'package:projet_flutter/page/login_page.dart';
 
 import 'page/login_page.dart';
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xffe6e6e5),
       ),
-      home: const HomePage(),
+      home: LoadingPage(),
     );
   }
 }
