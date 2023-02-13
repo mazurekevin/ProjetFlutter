@@ -39,7 +39,7 @@ class _LoadingPageState extends State<LoadingPage> {
         ),
         child: Center(
           child: Image.asset(
-            '/logo.png',
+            '/FluFlix2Big.png',
           ),
         ),
       ),
