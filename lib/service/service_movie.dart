@@ -46,7 +46,7 @@ class ServiceMovie {
 
   Future<List<MoviePreview>?> searchMovies(String search) async {
     String url =
-        "https://api.themoviedb.org/3/search/movie?api_key=${globals.apiKey}&language=en-US&query=${search}&page=1&include_adult=false";
+        "https://api.themoviedb.org/3/search/movie?api_key=${globals.apiKey}&language=en-US&query=$search&page=1&include_adult=false";
 
     final response = await http.get(Uri.parse(url));
 

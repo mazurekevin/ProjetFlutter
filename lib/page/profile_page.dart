@@ -94,7 +94,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    const blue = Color(0xff033976);
     const purple = Color(0xff6d07c5);
     return Scaffold(
       body: Visibility(
@@ -104,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: const EdgeInsets.all(20),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   'First name',
@@ -194,7 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   '${_user?.firstname}',
@@ -206,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   'Last name',
@@ -217,7 +216,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   '${_user?.lastname}',
@@ -229,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   'Email address',
@@ -240,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   '${_user?.email}',
@@ -252,7 +251,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Text(
                                   'Language',
@@ -263,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 child: _isLoggedUser
                                     ? DropdownButton<String>(

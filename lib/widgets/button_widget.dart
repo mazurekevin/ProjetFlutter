@@ -5,7 +5,7 @@ class ButtonWidget extends StatelessWidget {
   var onClick;
 
 
-  ButtonWidget({required this.btnText, this.onClick});
+  ButtonWidget({super.key, required this.btnText, this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ButtonWidget extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           btnText,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
               fontWeight: FontWeight.bold),

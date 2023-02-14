@@ -77,8 +77,12 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: Column(
                             children: <Widget>[
-                              PreviewWidget(
-                                moviePreview: _moviesPreview[index],
+                              Row(
+                                children: [
+                                  PreviewWidget(
+                                    moviePreview: _moviesPreview[index],
+                                  ),
+                                ],
                               ),
                               const SizedBox(
                                 height: 10,

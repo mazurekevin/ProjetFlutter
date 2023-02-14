@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projet_flutter/page/home_page.dart';
 import 'package:projet_flutter/page/navigation_page.dart';
 import 'package:projet_flutter/page/register_page.dart';
 import 'package:projet_flutter/globals.dart' as global;
@@ -30,13 +29,12 @@ class _LoginPageState extends State<LoginPage> {
     });
     var response = await ServiceUser().login(login);
     if (response?.email == login.email) {
-      print("good");
       global.user = response;
       //changer de page => homePage
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => NavigationPage()));
+              builder: (context) => const NavigationPage()));
     } else {
       print("erreur");
     }
@@ -67,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                         hint: "Password",
                         icon: Icons.vpn_key),
                     Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: const EdgeInsets.only(top: 10),
                       alignment: Alignment.centerRight,
                       child: const Text(
                         "Forgot Password?",
@@ -102,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute<void>(
                             builder: (BuildContext context) {
-                          return RegPage();
+                          return const RegPage();
                         }));
                       },
                     ),
@@ -118,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _textInput({controller, hint, icon}) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.white,

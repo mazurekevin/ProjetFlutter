@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../service/service_user.dart';
@@ -8,6 +7,8 @@ import 'login_page.dart';
 
 
 class RegPage extends StatefulWidget {
+  const RegPage({super.key});
+
   @override
   _RegPageState createState() => _RegPageState();
 }
@@ -25,7 +26,7 @@ class _RegPageState extends State<RegPage> {
       Navigator.push(context,
           MaterialPageRoute<void>(
               builder:(BuildContext context) {
-                return LoginPage();
+                return const LoginPage();
               }));
     }else{
       print("erreur");
@@ -38,7 +39,7 @@ class _RegPageState extends State<RegPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 30),
 
         child: Column(
           children: <Widget>[
@@ -46,7 +47,7 @@ class _RegPageState extends State<RegPage> {
             Expanded(
               flex: 1,
               child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
@@ -81,7 +82,7 @@ class _RegPageState extends State<RegPage> {
                         Navigator.push(context,
                             MaterialPageRoute<void>(
                                 builder:(BuildContext context) {
-                                  return LoginPage();
+                                  return const LoginPage();
                                 }));
                       },
                     ),
@@ -99,12 +100,12 @@ class _RegPageState extends State<RegPage> {
 
   Widget _textInput({controller, hint, icon}) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.only(top: 10),
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.white,
       ),
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(

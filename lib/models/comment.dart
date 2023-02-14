@@ -1,5 +1,5 @@
 import 'dart:convert';
-List<Comment> ListCommentFromJson(String str) => List<Comment>.from(json.decode(str).map((x) => Comment.fromJson(x)));
+List<Comment> listCommentFromJson(String str) => List<Comment>.from(json.decode(str).map((x) => Comment.fromJson(x)));
 Comment commentFromJson(String str) => Comment.fromJson(json.decode(str));
 
 String commentToJson(Comment data) => json.encode(data.toJson());

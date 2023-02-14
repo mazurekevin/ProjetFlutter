@@ -16,7 +16,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   final List<Widget> _screens = [
     const HomePage(),
-    SearchPage(),
+    const SearchPage(),
     ProfilePage(userId: globals.user!.id),
   ];
 

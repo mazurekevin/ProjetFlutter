@@ -18,7 +18,7 @@ class _LoadingPageState extends State<LoadingPage> {
     super.initState();
     Timer(const Duration(milliseconds: 4000), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     });
   }
   @override

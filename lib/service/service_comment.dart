@@ -31,12 +31,12 @@ class ServiceComment{
 
   Future<List<Comment>?> getCommentsByIdmovie(int idmovie) async{
     var client = http.Client();
-    var uri = Uri.parse('http://localhost:8082/api/comment/idmovie/${idmovie}');
+    var uri = Uri.parse('http://localhost:8082/api/comment/idmovie/$idmovie');
 
     var response = await client.get(uri);
     if(response.statusCode==200){
       var json = response.body;
-      return ListCommentFromJson(json);
+      return listCommentFromJson(json);
     }
     return null;
   }
