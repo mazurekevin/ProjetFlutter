@@ -4,6 +4,7 @@ import 'package:projet_flutter/models/comment.dart';
 import 'package:projet_flutter/globals.dart' as global;
 import 'package:projet_flutter/models/movie.dart';
 import 'package:projet_flutter/models/movie_provider.dart';
+import 'package:projet_flutter/page/profile_page.dart';
 import 'package:projet_flutter/service/service_movie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -365,7 +366,12 @@ class _MoviePageState extends State<MoviePage> {
                                                       ],
                                                     ),
                                                   ),
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => ProfilePage(userId: comments![index].iduser)));
+                                                  },
                                                 );
                                               }),
                                         ),

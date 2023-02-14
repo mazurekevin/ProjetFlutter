@@ -44,6 +44,24 @@ class ServiceMovie {
     return null;
   }
 
+  Future<List<MoviePreview>?> searchMovies(String search) async {
+    String url =
+        "https://api.themoviedb.org/3/search/movie?api_key=${globals.apiKey}&language=en-US&query=${search}&page=1&include_adult=false";
+
+    final response = await http.get(Uri.parse(url));
+
+    try {
+      if (response.statusCode == 200) {
+        var json = response.body;
+        List<MoviePreview> listMoviePreview = MoviePreview.listMoviePreview(jsonDecode(json)['results']);
+        return listMoviePreview;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return [];
+  }
+
   Future<MovieProvider?> getProviders(int id) async {
     String url =
         "https://api.themoviedb.org/3/movie/$id/watch/providers?api_key=${globals.apiKey}";
