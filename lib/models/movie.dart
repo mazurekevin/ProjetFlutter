@@ -1,7 +1,6 @@
 class Movie {
   final String title;
   final String posterPath;
-  final String backdropPath;
   final String tagline;
   final String overview;
   final double voteAverage;
@@ -12,7 +11,6 @@ class Movie {
   Movie({
     required this.title,
     required this.posterPath,
-    required this.backdropPath,
     required this.tagline,
     required this.overview,
     required this.voteAverage,
@@ -35,21 +33,43 @@ class Movie {
     return movie;
   }
 
-  factory Movie.fromJson(
-    Map<String, dynamic> json,
-    List<String> genres,
-  ) =>
-      Movie(
-        title: json['title'],
-        posterPath: json['poster_path'],
-        backdropPath: json['backdrop_path'],
-        tagline: json['tagline'],
-        overview: json['overview'],
-        voteAverage: json['vote_average'].toDouble(),
-        releaseDate: json['release_date'],
-        runtime: json['runtime'],
-        genres: genres,
-      );
+  factory Movie.fromJson(Map<String, dynamic> json, List<String> genres) {
+    if (json['title'] == "") {
+      json['title'] = '';
+    }
+    if (json['poster_path'] == "") {
+      json['poster_path'] = '';
+    }
+    if (json['tagline'] == "") {
+      json['tagline'] = '';
+    }
+    if (json['overview'] == "") {
+      json['overview'] = '';
+    }
+    if (json['vote_average'] == "") {
+      json['vote_average'] = 0;
+    }
+    if (json['release_date'] == "") {
+      json['release_date'] = '';
+    }
+    if (json['runtime'] == "") {
+      json['runtime'] = 0;
+    }
+    if (json['genres'] == "") {
+      json['genres'] = [];
+    }
+
+    return Movie(
+      title: json['title'],
+      posterPath: json['poster_path'],
+      tagline: json['tagline'],
+      overview: json['overview'],
+      voteAverage: json['vote_average'].toDouble(),
+      releaseDate: json['release_date'],
+      runtime: json['runtime'],
+      genres: genres,
+    );
+  }
 
   genresToString() {
     String genresString = '';

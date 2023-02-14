@@ -20,22 +20,25 @@ class MoviePreview {
 
   static List<MoviePreview> listMoviePreview(dynamic json) {
     List<MoviePreview> listMoviePreview = [];
-    var i = 0;
-    print(json);
     json.forEach((element) {
       MoviePreview moviePreview = MoviePreview.fromJson(element);
-      print(i);
-      print(moviePreview);
-      print('!!!!!!!!!!!!!');
-      i++;
       listMoviePreview.add(moviePreview);
     });
     return listMoviePreview;
   }
 
   factory MoviePreview.fromJson(Map<String, dynamic> json) {
+    if (json["title"] == null) {
+      json["title"] = "";
+    }
     if (json["poster_path"] == null) {
       json["poster_path"] = "";
+    }
+    if (json["vote_average"] == null) {
+      json["vote_average"] = 0;
+    }
+    if (json["release_date"] == null) {
+      json["release_date"] = "";
     }
 
     return MoviePreview(
