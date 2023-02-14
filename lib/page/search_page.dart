@@ -36,7 +36,6 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             const HeaderContainer(text: "Search", height: 0.10),
