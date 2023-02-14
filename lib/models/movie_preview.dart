@@ -33,13 +33,19 @@ class MoviePreview {
     return listMoviePreview;
   }
 
-  factory MoviePreview.fromJson(Map<String, dynamic> json) => MoviePreview(
-    id: json["id"],
-    title: json["title"],
-    posterPath: json["poster_path"],
-    voteAverage: json["vote_average"].toDouble(),
-    releaseDate: json["release_date"],
-  );
+  factory MoviePreview.fromJson(Map<String, dynamic> json) {
+    if (json["poster_path"] == null) {
+      json["poster_path"] = "";
+    }
+
+    return MoviePreview(
+      id: json["id"],
+      title: json["title"],
+      posterPath: json["poster_path"],
+      voteAverage: json["vote_average"].toDouble(),
+      releaseDate: json["release_date"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     "id": id,

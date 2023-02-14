@@ -15,6 +15,7 @@ class PreviewWidget extends StatefulWidget {
 }
 
 class _PreviewWidgetState extends State<PreviewWidget> {
+  late Widget posterImage;
   bool isLiked = false;
   Icon liked = const Icon(Icons.favorite_border);
 
@@ -22,6 +23,17 @@ class _PreviewWidgetState extends State<PreviewWidget> {
   Widget build(BuildContext context) {
     var releaseDate = DateFormat('d MMMM yyyy')
         .format(DateTime.parse(widget.moviePreview.releaseDate));
+
+    if (widget.moviePreview.posterPath == "") {
+      posterImage = const Icon(
+        Icons.movie,
+      );
+    } else {
+      posterImage = Image.network(
+        'https://image.tmdb.org/t/p/w500${widget.moviePreview.posterPath}',
+        fit: BoxFit.cover,
+      );
+    }
 
     return Container(
         decoration: BoxDecoration(
@@ -51,10 +63,7 @@ class _PreviewWidgetState extends State<PreviewWidget> {
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
                   ),
-                  child: Image.network(
-                    'https://image.tmdb.org/t/p/w500${widget.moviePreview.posterPath}',
-                    fit: BoxFit.cover,
-                  ),
+                  child: posterImage,
                 ),
                 IconButton(
                   onPressed: () {
@@ -113,11 +122,6 @@ class _PreviewWidgetState extends State<PreviewWidget> {
                         Icons.star,
                         color: Colors.yellow,
                       ),
-                      // Image.asset(
-                      //   '/star.png',
-                      //   width: 15,
-                      //   height: 15,
-                      // ),
                     ],
                   ),
                 ],
