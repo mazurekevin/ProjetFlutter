@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                         hint: "Email",
                         icon: Icons.email),
                     _textInput(
+
                         controller: passwordController,
                         hint: "Password",
                         icon: Icons.vpn_key),
@@ -123,7 +124,18 @@ class _LoginPageState extends State<LoginPage> {
         color: Colors.white,
       ),
       padding: const EdgeInsets.only(left: 10),
-      child: TextFormField(
+      child: controller == passwordController ?
+      TextFormField(
+        obscureText: true,
+        controller: controller,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: hint,
+          prefixIcon: Icon(icon),
+        ),
+      ):
+      TextFormField(
+
         controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
