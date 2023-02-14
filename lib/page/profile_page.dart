@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:projet_flutter/models/language.dart';
 import 'package:projet_flutter/models/user.dart';
-import 'package:projet_flutter/service/service_user.dart';
+import 'package:projet_flutter/service/service_language.dart';
 import '/globals.dart' as globals;
 
 class ProfilePage extends StatefulWidget {
@@ -18,8 +19,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   User? _user;
+  List<Language> _languages = [];
   bool _isLoaded = false;
   bool _isLoggedUser = false;
+  String _selectedItem = "";
 
   final List<PopupMenuEntry<String>> items = [
     const PopupMenuItem(
@@ -35,26 +38,31 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    getUser();
+    _getData();
   }
 
-  getUser() async {
+  _getData() async {
     //_user = await ServiceUser().getUser(widget.userId);
     _user = User(
-        id: 1,
-        firstname: "Jean-Luc",
-        lastname: "LYS",
-        email: "jlys@gmail.com",
-        password: "123456789");
+      id: 1,
+      firstname: "Jean-Luc",
+      lastname: "LYS",
+      email: "jlys@gmail.com",
+      password: "123456789",
+    );
     if (_user != null) {
-      setState(() {
-        _isLoaded = true;
-        _isLoggedUser = _user?.id == globals.user?.id;
-      });
+      _languages += (await ServiceLanguage().getLanguages())!;
+      if (_languages.isNotEmpty) {
+        setState(() {
+          _isLoaded = true;
+          _isLoggedUser = _user?.id == globals.user?.id;
+          _selectedItem = _languages.first.iso6391;
+        });
+      }
     }
   }
 
-  changeProfilePicture(BuildContext context, Offset offset) {
+  _changeProfilePicture(BuildContext context, Offset offset) {
     final selectedValue = showMenu<String>(
       context: context,
       position: RelativeRect.fromLTRB(
@@ -91,9 +99,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   InkWell(
                     onTap: () {
                       if (_isLoggedUser) {
-                        RenderBox renderBox = context.findRenderObject() as RenderBox;
+                        RenderBox renderBox =
+                            context.findRenderObject() as RenderBox;
                         var offset = renderBox.localToGlobal(Offset.zero);
-                        changeProfilePicture(context, offset);
+                        _changeProfilePicture(context, offset);
                       }
                     },
                     child: ProfilePicture(
@@ -220,6 +229,42 @@ class _ProfilePageState extends State<ProfilePage> {
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold,
                                   ),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Container(
+                                width: double.infinity,
+                                child: Text(
+                                  'Language',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                width: double.infinity,
+                                child: DropdownButton<String>(
+                                  value: _selectedItem,
+                                  elevation: 16,
+                                  style: const TextStyle(color: purple),
+                                  underline: Container(
+                                    height: 2,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      _selectedItem = newValue!;
+                                    });
+                                  },
+                                  items: _languages.map<DropdownMenuItem<String>>(
+                                      (Language value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.iso6391,
+                                      child: Text(value.englishName),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ],
