@@ -12,6 +12,8 @@ class User {
     required this.lastname,
     required this.email,
     required this.password,
+    required this.languageIso,
+    required this.languageName
   });
 
   int id;
@@ -19,6 +21,8 @@ class User {
   String lastname;
   String email;
   String password;
+  String languageIso;
+  String languageName;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],
@@ -26,6 +30,8 @@ class User {
     lastname: json["lastname"],
     email: json["email"],
     password: json["password"],
+    languageIso: json['languageIso'],
+    languageName: json['languageName']
   );
 
   Map<String, dynamic> toJson() => {
@@ -34,5 +40,7 @@ class User {
     "lastname": lastname,
     "email": email,
     "password": password,
+    "languageIso": languageIso,
+    "languageName": languageName
   };
 }

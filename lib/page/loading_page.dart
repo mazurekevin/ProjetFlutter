@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
@@ -28,7 +27,7 @@ class _LoadingPageState extends State<LoadingPage> {
     const purple = Color(0xff6d07c5);
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
             blue,
             purple,

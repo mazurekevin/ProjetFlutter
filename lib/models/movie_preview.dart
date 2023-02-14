@@ -20,8 +20,14 @@ class MoviePreview {
 
   static List<MoviePreview> listMoviePreview(dynamic json) {
     List<MoviePreview> listMoviePreview = [];
+    var i = 0;
+    print(json);
     json.forEach((element) {
       MoviePreview moviePreview = MoviePreview.fromJson(element);
+      print(i);
+      print(moviePreview);
+      print('!!!!!!!!!!!!!');
+      i++;
       listMoviePreview.add(moviePreview);
     });
     return listMoviePreview;

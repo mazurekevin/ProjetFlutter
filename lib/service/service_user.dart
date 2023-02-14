@@ -5,8 +5,9 @@ import '../models/login.dart';
 import '../models/user.dart';
 
 
-class ServiceUser{
-  Future<int> createUser(String firstname, String lastname, String email, String password) async {
+class ServiceUser {
+  Future<int> createUser(String firstname, String lastname, String email,
+      String password) async {
     final response = await http.post(
       Uri.parse('http://localhost:8082/api/user/createUser'),
       headers: <String, String>{
@@ -20,9 +21,9 @@ class ServiceUser{
       }),
     );
 
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       return response.statusCode;
-    }else{
+    } else {
       return response.statusCode;
     }
   }
@@ -38,7 +39,7 @@ class ServiceUser{
         'password': login.password!
       }),
     );
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       var json = response.body;
       return userFromJson(json);
     }
@@ -46,6 +47,14 @@ class ServiceUser{
     return null;
   }
 
+  Future<User?> getUser(int id) async {
+    var response = await http.get(Uri.parse('http://localhost:8082/api/user/$id'));
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return userFromJson(json);
+    }
+    return null;
+  }
 
 
 }

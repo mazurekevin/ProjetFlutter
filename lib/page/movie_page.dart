@@ -314,9 +314,6 @@ class _MoviePageState extends State<MoviePage> {
                                               itemCount: comments?.length,
                                               itemBuilder: (context, index) {
                                                 return InkWell(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40.0),
                                                   child: Container(
                                                     margin:
                                                         const EdgeInsets.all(
@@ -329,14 +326,14 @@ class _MoviePageState extends State<MoviePage> {
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
-                                                                    .start,
+                                                                    .end,
                                                             children: [
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                    comments![
-                                                                            index]
-                                                                        .firstname,
+                                                                    comments![index]
+                                                                            .firstname +
+                                                                        " ",
                                                                     style:
                                                                         const TextStyle(
                                                                       fontWeight:
@@ -359,7 +356,8 @@ class _MoviePageState extends State<MoviePage> {
                                                               ),
                                                               Text(
                                                                 comments![index]
-                                                                    .content,
+                                                                        .content +
+                                                                    "  ",
                                                               ),
                                                             ],
                                                           ),
