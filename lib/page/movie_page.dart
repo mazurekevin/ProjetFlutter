@@ -18,8 +18,8 @@ class MoviePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MoviePage> createState() => _MoviePageState( this.movieId,
-      this.movieTitle);
+  State<MoviePage> createState() =>
+      _MoviePageState(this.movieId, this.movieTitle);
 }
 
 class _MoviePageState extends State<MoviePage> {
@@ -29,8 +29,7 @@ class _MoviePageState extends State<MoviePage> {
   var isLoaded = false;
   final commentController = TextEditingController();
 
-  _MoviePageState(this.movieId,
-      this.movieTitle);
+  _MoviePageState(this.movieId, this.movieTitle);
 
   @override
   void initState() {
@@ -40,8 +39,8 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   addComment(String content) async {
-    var response = await ServiceComment()
-        .createComment(global.user!.firstname, global.user!.lastname,this.movieId , global.user!.id, content);
+    var response = await ServiceComment().createComment(global.user!.firstname,
+        global.user!.lastname, this.movieId, global.user!.id, content);
     if (response != null) {
       setState(() {
         comments?.add(response);
@@ -95,10 +94,13 @@ class _MoviePageState extends State<MoviePage> {
                                               itemCount: comments?.length,
                                               itemBuilder: (context, index) {
                                                 return InkWell(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40.0),
                                                   child: Container(
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    20.0)),
                                                     margin: EdgeInsets.all(10),
                                                     child: Row(
                                                       children: [
@@ -108,14 +110,14 @@ class _MoviePageState extends State<MoviePage> {
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
-                                                                    .start,
+                                                                    .end,
                                                             children: [
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                    comments![
-                                                                            index]
-                                                                        .firstname,
+                                                                    comments![index]
+                                                                            .firstname +
+                                                                        " ",
                                                                     style:
                                                                         const TextStyle(
                                                                       fontWeight:
@@ -138,7 +140,8 @@ class _MoviePageState extends State<MoviePage> {
                                                               ),
                                                               Text(
                                                                 comments![index]
-                                                                    .content,
+                                                                        .content +
+                                                                    "  ",
                                                               ),
                                                             ],
                                                           ),
@@ -158,33 +161,46 @@ class _MoviePageState extends State<MoviePage> {
                                               controller: commentController,
                                               decoration: InputDecoration(
                                                 border: InputBorder.none,
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(30.0),
-                                                  borderSide: BorderSide(color: Colors.grey),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.grey),
                                                 ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(30.0),
-                                                  borderSide: BorderSide(color: Colors.grey),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.grey),
                                                 ),
-                                                contentPadding: EdgeInsets.all(20.0),
-                                                hintText: 'Ajouter un commentaire',
+                                                contentPadding:
+                                                    EdgeInsets.all(20.0),
+                                                hintText:
+                                                    'Ajouter un commentaire',
                                                 prefixIcon: Container(
                                                   margin: EdgeInsets.all(4.0),
                                                   width: 48.0,
                                                   height: 48.0,
                                                 ),
                                                 suffixIcon: Container(
-                                                  margin: EdgeInsets.only(right: 4.0),
+                                                  margin: EdgeInsets.only(
+                                                      right: 4.0),
                                                   width: 70.0,
                                                   child: IconButton(
                                                     icon: Icon(Icons.send),
                                                     iconSize: 30.0,
-                                                    onPressed: () {setState(() {
-                                                      addComment(commentController.text);
-                                                      commentController.clear();
-                                                    });
-
-
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        addComment(
+                                                            commentController
+                                                                .text);
+                                                        commentController
+                                                            .clear();
+                                                      });
                                                     },
                                                   ),
                                                 ),
