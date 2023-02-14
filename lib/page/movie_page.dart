@@ -32,7 +32,8 @@ class _MoviePageState extends State<MoviePage> {
   late MovieProvider _movieProvider;
   late Widget providerWidget;
   List<Comment>? comments;
-  var isLoaded = false;
+  var isProviderLoaded = false;
+  var isMovieLoaded = false;
   final commentController = TextEditingController();
 
   @override
@@ -60,7 +61,7 @@ class _MoviePageState extends State<MoviePage> {
     _movie = (await ServiceMovie().getMovie(widget.movieId))!;
     if (_movie != null) {
       setState(() {
-        isLoaded = true;
+        isMovieLoaded = true;
       });
     }
   }
@@ -91,7 +92,7 @@ class _MoviePageState extends State<MoviePage> {
     }
 
     setState(() {
-      isLoaded = true;
+      isProviderLoaded = true;
     });
   }
 
@@ -136,7 +137,7 @@ class _MoviePageState extends State<MoviePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Visibility(
-                      visible: isLoaded,
+                      visible: isMovieLoaded && isProviderLoaded,
                       replacement: const Center(
                         child: CircularProgressIndicator(),
                       ),
