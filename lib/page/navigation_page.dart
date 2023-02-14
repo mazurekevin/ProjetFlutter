@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/page/home_page.dart';
 import 'package:projet_flutter/page/profile_page.dart';
+import 'package:projet_flutter/page/search_page.dart';
 import '/globals.dart' as globals;
 
 class NavigationPage extends StatefulWidget {
@@ -15,8 +16,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   final List<Widget> _screens = [
     const HomePage(),
-    // SearchBar
-    const HomePage(),
+    SearchPage(),
     ProfilePage(userId: globals.user!.id),
   ];
 
