@@ -28,9 +28,9 @@ class MoviePage extends StatefulWidget {
 class _MoviePageState extends State<MoviePage> {
   late int movieId;
   String? movieTitle;
-  late Movie? _movie;
+  Movie? _movie;
   late MovieProvider _movieProvider;
-  late Widget providerWidget;
+  Widget? providerWidget;
   List<Comment>? comments;
   var isProviderLoaded = false;
   var isMovieLoaded = false;
@@ -116,13 +116,6 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
-    var releaseDate = _movie?.releaseDate;
-
-    if (releaseDate != null) {
-      releaseDate =
-          DateFormat('d MMMM yyyy').format(DateTime.parse(releaseDate));
-    }
-
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(bottom: 30),
@@ -144,7 +137,7 @@ class _MoviePageState extends State<MoviePage> {
                       child: Column(
                         children: [
                           Text(
-                            _movie!.title,
+                            _movie?.title ?? "",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -177,7 +170,7 @@ class _MoviePageState extends State<MoviePage> {
                                     bottomRight: Radius.circular(10),
                                   ),
                                   child: Image.network(
-                                    'https://image.tmdb.org/t/p/w500${_movie!.posterPath}',
+                                    'https://image.tmdb.org/t/p/w500${_movie?.posterPath ?? ''}',
                                     width: 100,
                                     height: 150,
                                   ),
@@ -193,7 +186,9 @@ class _MoviePageState extends State<MoviePage> {
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        releaseDate!,
+                                        DateFormat('d MMMM yyyy').format(
+                                            DateTime.parse(
+                                                _movie?.releaseDate ?? '0000-00-00')),
                                         textAlign: TextAlign.left,
                                         style: const TextStyle(
                                           fontSize: 20,
@@ -203,7 +198,7 @@ class _MoviePageState extends State<MoviePage> {
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        _movie!.genresToString(),
+                                        _movie?.genresToString() ?? '',
                                         style: const TextStyle(
                                           fontSize: 20,
                                         ),
@@ -215,7 +210,7 @@ class _MoviePageState extends State<MoviePage> {
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        _movie!.tagline,
+                                        _movie?.tagline ?? '',
                                         style: const TextStyle(
                                           fontStyle: FontStyle.italic,
                                           fontSize: 20,
@@ -250,7 +245,7 @@ class _MoviePageState extends State<MoviePage> {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      providerWidget,
+                                      providerWidget!,
                                     ],
                                   ),
                                 ],
@@ -333,9 +328,7 @@ class _MoviePageState extends State<MoviePage> {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                    comments![index]
-                                                                            .firstname +
-                                                                        " ",
+                                                                    "${comments![index].firstname} ",
                                                                     style:
                                                                         const TextStyle(
                                                                       fontWeight:
@@ -357,9 +350,7 @@ class _MoviePageState extends State<MoviePage> {
                                                                 ],
                                                               ),
                                                               Text(
-                                                                comments![index]
-                                                                        .content +
-                                                                    "  ",
+                                                                "${comments![index].content}  ",
                                                               ),
                                                             ],
                                                           ),
@@ -371,7 +362,11 @@ class _MoviePageState extends State<MoviePage> {
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) => ProfilePage(userId: comments![index].iduser)));
+                                                            builder: (context) =>
+                                                                ProfilePage(
+                                                                    userId: comments![
+                                                                            index]
+                                                                        .iduser)));
                                                   },
                                                 );
                                               }),
