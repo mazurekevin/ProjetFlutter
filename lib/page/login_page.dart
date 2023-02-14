@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/page/home_page.dart';
+import 'package:projet_flutter/page/navigation_page.dart';
 import 'package:projet_flutter/page/register_page.dart';
 import 'package:projet_flutter/globals.dart' as global;
 
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => HomePage()));
+              builder: (context) => NavigationPage()));
     } else {
       print("erreur");
     }

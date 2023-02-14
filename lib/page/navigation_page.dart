@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/page/home_page.dart';
 import 'package:projet_flutter/page/profile_page.dart';
+import '/globals.dart' as globals;
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class _NavigationPageState extends State<NavigationPage> {
     const HomePage(),
     // SearchBar
     const HomePage(),
-    //ProfilePage(userId: globals.user!.id),
-    ProfilePage(userId: 1),
+    ProfilePage(userId: globals.user!.id),
   ];
 
   @override

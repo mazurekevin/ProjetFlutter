@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:projet_flutter/models/language.dart';
 import 'package:projet_flutter/models/user.dart';
 import 'package:projet_flutter/service/service_language.dart';
+import 'package:image_picker/image_picker.dart';
+import '../service/service_user.dart';
 import '/globals.dart' as globals;
 
 class ProfilePage extends StatefulWidget {
@@ -24,6 +28,19 @@ class _ProfilePageState extends State<ProfilePage> {
   bool _isLoggedUser = false;
   String _selectedItem = "";
 
+  File? _image;
+
+  Future getImage(ImageSource source) async {
+    final image = await ImagePicker().pickImage(source: source);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+
+    setState(() {
+      _image = imageTemporary;
+    });
+  }
+
   final List<PopupMenuEntry<String>> items = [
     const PopupMenuItem(
       value: "Gallery",
@@ -42,21 +59,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _getData() async {
-    //_user = await ServiceUser().getUser(widget.userId);
-    _user = User(
-      id: 1,
-      firstname: "Jean-Luc",
-      lastname: "LYS",
-      email: "jlys@gmail.com",
-      password: "123456789",
-    );
+    _user = await ServiceUser().getUser(widget.userId);
     if (_user != null) {
       _languages += (await ServiceLanguage().getLanguages())!;
       if (_languages.isNotEmpty) {
         setState(() {
           _isLoaded = true;
           _isLoggedUser = _user?.id == globals.user?.id;
-          _selectedItem = _languages.first.iso6391;
+          _selectedItem = _user!.languageIso;
         });
       }
     }
@@ -75,9 +85,9 @@ class _ProfilePageState extends State<ProfilePage> {
     );
     if (selectedValue != null) {
       if (selectedValue == "Gallery") {
-        // code à effectuer si galerie sélectionné
+        getImage(ImageSource.gallery);
       } else if (selectedValue == "Picture") {
-        // code à effectuer si photo sélectionné
+        getImage(ImageSource.camera);
       }
     }
   }
@@ -89,6 +99,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: Visibility(
         visible: _isLoaded,
+        replacement: const Center(
+          child: CircularProgressIndicator(),
+        ),
         child: Column(
           children: [
             Container(
@@ -105,12 +118,19 @@ class _ProfilePageState extends State<ProfilePage> {
                         _changeProfilePicture(context, offset);
                       }
                     },
-                    child: ProfilePicture(
-                      name: '${_user?.firstname} ${_user?.lastname}',
-                      radius: 50,
-                      fontsize: 21,
-                      random: true,
-                    ),
+                    child: _image == null
+                        ? ProfilePicture(
+                            name: '${_user?.firstname} ${_user?.lastname}',
+                            radius: 50,
+                            fontsize: 21,
+                            random: true,
+                          )
+                        : Image.file(
+                            _image!,
+                            width: 250,
+                            height: 250,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -245,27 +265,30 @@ class _ProfilePageState extends State<ProfilePage> {
                               const SizedBox(height: 10),
                               Container(
                                 width: double.infinity,
-                                child: DropdownButton<String>(
-                                  value: _selectedItem,
-                                  elevation: 16,
-                                  style: const TextStyle(color: purple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      _selectedItem = newValue!;
-                                    });
-                                  },
-                                  items: _languages.map<DropdownMenuItem<String>>(
-                                      (Language value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.iso6391,
-                                      child: Text(value.englishName),
-                                    );
-                                  }).toList(),
-                                ),
+                                child: _isLoggedUser
+                                    ? DropdownButton<String>(
+                                        value: _selectedItem,
+                                        elevation: 16,
+                                        style: const TextStyle(color: purple),
+                                        underline: Container(
+                                          height: 2,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            _selectedItem = newValue!;
+                                          });
+                                        },
+                                        items: _languages
+                                            .map<DropdownMenuItem<String>>(
+                                                (Language value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value.iso6391,
+                                            child: Text(value.englishName),
+                                          );
+                                        }).toList(),
+                                      )
+                                    : Text("${_user?.languageName}"),
                               ),
                             ],
                           ),
