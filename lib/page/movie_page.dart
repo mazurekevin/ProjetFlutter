@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/models/comment.dart';
 import 'package:projet_flutter/globals.dart' as global;
